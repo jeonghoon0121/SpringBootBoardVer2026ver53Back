@@ -13,43 +13,45 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostController {
     private final BoardService boardService;
+
     public PostController(BoardService boardService) {
         this.boardService = boardService;
     }
+
     @GetMapping("/add/{boardId}")
     public String showPostAddForm(@PathVariable int boardId, Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
         model.addAttribute("boardlist", boardDTOS);
-
         model.addAttribute("boardId", boardId);
         return "postAdd";
     }
+
     @GetMapping("/update/{postId}")
     public String showPostUpdateForm(@PathVariable int postId, Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
         model.addAttribute("boardlist", boardDTOS);
-
         model.addAttribute("postId", postId);
         return "postUpdate";
     }
+
     @GetMapping("/delete/{postId}")
     public String showPostDeleteForm(@PathVariable int postId, Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
         model.addAttribute("boardlist", boardDTOS);
-
         model.addAttribute("postId", postId);
         return "postDelete";
     }
-    /*post 더하기*/
+
+    /* post 추가 */
     @PostMapping("/add/{boardId}")
     public String handlePostAdd(@PathVariable int boardId,
                                 @ModelAttribute PostDTO postDTO) {
-
         postDTO.setBoardId(boardId);
         boardService.addNewPost(postDTO);
         return "redirect:/board/" + boardId;
     }
-    /*post 수정*/
+
+    /* post 수정 */
     @PostMapping("/update/{postId}")
     public String handlePostUpdate(@PathVariable int postId,
                                    @ModelAttribute PostDTO postDTO) {
@@ -57,13 +59,14 @@ public class PostController {
         boardService.updatePost(postDTO);
         return "redirect:/post/" + postId;
     }
-    /*post 삭제*/
+
+    /* post 삭제 */
     @PostMapping("/delete/{postId}")
     public String handlePostDelete(@PathVariable int postId,
                                    @ModelAttribute PostDTO postDTO) {
         postDTO.setPostId(postId);
-        int boardId= boardService.findonePost(postDTO.getPostId()).getBoardId();
+        int boardId = boardService.findOnePost(postDTO.getPostId()).getBoardId(); // 수정된 부분
         boardService.deletePost(postDTO);
-        return "redirect:/board/"+boardId;
+        return "redirect:/board/" + boardId;
     }
 }

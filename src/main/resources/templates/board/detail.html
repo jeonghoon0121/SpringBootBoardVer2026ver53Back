@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board Detail</title>
+</head>
+<body>
+<h1 th:text="${board.name}">Board Name</h1>
+<p th:text="${board.description}">Board Description</p>
+
+<a th:href="@{/boards/{id}/posts(id=${board.boardId})}">View Posts</a>
+</body>
+</html>

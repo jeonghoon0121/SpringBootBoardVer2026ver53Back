@@ -9,16 +9,25 @@ import java.util.List;
 
 @org.apache.ibatis.annotations.Mapper
 public interface BoardMapper {
+    // ===== Board =====
     List<BoardDTO> findAllBoards();
-    List<PostDTO> findAllPosts();
-    List<CommentDTO> findAllComments();
     BoardDTO findOneBoard(int boardId);
+
+    void addBoard(BoardDTO boardDTO);
+    void updateBoard(BoardDTO boardDTO);
+    void deleteBoard(int boardId);
+
+    // ===== Post =====
+    List<PostDTO> findAllPosts();
     PostDTO findOnePost(int postId);
-    CommentDTO findOneComment(int commentId);
 
     void addNewPost(PostDTO postDTO);
     void updatePost(PostDTO postDTO);
     void deletePost(PostDTO postDTO);
+
+    // ===== Comment =====
+    List<CommentDTO> findAllComments();
+    CommentDTO findOneComment(int commentId);
 
     void addComment(CommentDTO commentDTO);
     void updateComment(CommentDTO commentDTO);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
 @RequestMapping("")
 public class HomeController {
@@ -39,7 +38,7 @@ public class HomeController {
     @GetMapping("board/{boardId}")
     public String getBoardList(@PathVariable int boardId, Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
-        BoardDTO board = boardService.findoneBoard(boardId);
+        BoardDTO board = boardService.findOneBoard(boardId); // 수정된 부분
         List<PostDTO> posts = boardService.findPostsByBoardId(boardId);
 
         model.addAttribute("boardlist", boardDTOS);
@@ -51,7 +50,7 @@ public class HomeController {
     @GetMapping("post/{postId}")
     public String getPostDetail(@PathVariable int postId, Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
-        PostDTO post = boardService.findonePost(postId);
+        PostDTO post = boardService.findOnePost(postId); // 수정된 부분
         List<CommentDTO> comments = boardService.findCommentsByPostId(postId);
 
         model.addAttribute("boardlist", boardDTOS);
@@ -59,8 +58,4 @@ public class HomeController {
         model.addAttribute("commentlist", comments);
         return "postDetail";
     }
-
-
 }
-
-

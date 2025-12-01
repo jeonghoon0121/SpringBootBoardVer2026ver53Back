@@ -82,7 +82,26 @@
         FROM comment
         WHERE comment_id = #{commentId}
     </select>
+    <!-- 등록 -->
+    <insert id="insertBoard" parameterType="com.abc.boardver52.model.dto.BoardDTO">
+        INSERT INTO board (name, description, user_active, admin_active)
+        VALUES (#{name}, #{description}, #{userActive}, #{adminActive})
+    </insert>
 
+    <!-- 수정 -->
+    <update id="updateBoard" parameterType="com.abc.boardver52.model.dto.BoardDTO">
+        UPDATE board
+        SET name = #{name},
+        description = #{description},
+        user_active = #{userActive},
+        admin_active = #{adminActive}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM board WHERE board_id = #{boardId}
+    </delete>
     <!-- 수정된 parameterType 경로 -->
     <insert id="addNewPost" parameterType="com.abc.boardver52.model.dto.PostDTO">
         INSERT INTO post (
