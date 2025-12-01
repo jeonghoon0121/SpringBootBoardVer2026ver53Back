@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.abc.boardver52.model.dao.BoardMapper">
+<mapper namespace="com.abc.board.model.dao.BoardMapper">
 
-    <resultMap id="boardResultMap" type="com.abc.boardver52.model.dto.BoardDTO">
+    <resultMap id="boardResultMap" type="com.abc.board.model.dto.BoardDTO">
         <id property="boardId" column="board_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
@@ -12,7 +12,7 @@
         <result property="adminActive" column="admin_active"/>
     </resultMap>
 
-    <resultMap id="postResultMap" type="com.abc.boardver52.model.dto.PostDTO">
+    <resultMap id="postResultMap" type="com.abc.board.model.dto.PostDTO">
         <id property="postId" column="post_id"/>
         <result property="boardId" column="board_id"/>
         <result property="authorId" column="author_id"/>
@@ -31,7 +31,7 @@
         <result property="isSecret" column="is_secret"/>
     </resultMap>
 
-    <resultMap id="commentResultMap" type="com.abc.boardver52.model.dto.CommentDTO">
+    <resultMap id="commentResultMap" type="com.abc.board.model.dto.CommentDTO">
         <id property="commentId" column="comment_id"/>
         <result property="postId" column="post_id"/>
         <result property="authorId" column="author_id"/>
@@ -42,7 +42,6 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
-    <!-- 조회 쿼리들 -->
     <select id="findAllBoards" resultMap="boardResultMap">
         SELECT board_id, name, description
         FROM board
@@ -83,8 +82,27 @@
         WHERE comment_id = #{commentId}
     </select>
 
+    <insert id="addBoard" parameterType="com.abc.board.model.dto.BoardDTO">
+        INSERT INTO board (name, description, user_active, admin_active)
+        VALUES (#{name}, #{description}, #{userActive}, #{adminActive})
+    </insert>
+
+    <!-- 수정 -->
+    <update id="updateBoard" parameterType="com.abc.board.model.dto.BoardDTO">
+        UPDATE board
+        SET name = #{name},
+        description = #{description},
+        user_active = #{userActive},
+        admin_active = #{adminActive}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="deleteBoard" parameterType="int">
+        DELETE FROM board WHERE board_id = #{boardId}
+    </delete>
     <!-- 수정된 parameterType 경로 -->
-    <insert id="addNewPost" parameterType="com.abc.boardver52.model.dto.PostDTO">
+    <insert id="addNewPost" parameterType="com.abc.board.model.dto.PostDTO">
         INSERT INTO post (
         board_id, author_id, password, title, content,
         view_count, ip_hash, created_at, updated_at
@@ -94,7 +112,7 @@
         )
     </insert>
 
-    <update id="updatePost" parameterType="com.abc.boardver52.model.dto.PostDTO">
+    <update id="updatePost" parameterType="com.abc.board.model.dto.PostDTO">
         UPDATE post
         SET title = #{title}, content = #{content}, updated_at = #{updatedAt}
         WHERE post_id = #{postId}
@@ -102,14 +120,14 @@
         AND password = #{password}
     </update>
 
-    <delete id="deletePost" parameterType="com.abc.boardver52.model.dto.PostDTO">
+    <delete id="deletePost" parameterType="com.abc.board.model.dto.PostDTO">
         DELETE FROM post
         WHERE post_id = #{postId}
         AND author_id = #{authorId}
         AND password = #{password}
     </delete>
 
-    <insert id="addComment" parameterType="com.abc.boardver52.model.dto.CommentDTO">
+    <insert id="addComment" parameterType="com.abc.board.model.dto.CommentDTO">
         INSERT INTO comment (
         post_id, author_id, password, content,
         ip_hash, created_at, updated_at
@@ -119,7 +137,7 @@
         )
     </insert>
 
-    <update id="updateComment" parameterType="com.abc.boardver52.model.dto.CommentDTO">
+    <update id="updateComment" parameterType="com.abc.board.model.dto.CommentDTO">
         UPDATE comment
         SET content = #{content}, ip_hash = #{ipHash}, updated_at = #{updatedAt}
         WHERE comment_id = #{commentId}
@@ -127,7 +145,7 @@
         AND password = #{password}
     </update>
 
-    <delete id="deleteComment" parameterType="com.abc.boardver52.model.dto.CommentDTO">
+    <delete id="deleteComment" parameterType="com.abc.board.model.dto.CommentDTO">
         DELETE FROM comment
         WHERE comment_id = #{commentId}
         AND author_id = #{authorId}

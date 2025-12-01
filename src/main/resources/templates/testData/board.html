@@ -1,0 +1,9 @@
+<ul>
+    <li th:each="board : ${boardList}">
+        <p th:text="${board.boardId}"></p>
+        <p th:text="${board.name}"></p>
+        <p th:text="${board.description}"></p>
+        <p th:text="${board.userActive}"></p>
+        <p th:text="${board.adminActive}"></p>
+    </li>
+</ul>

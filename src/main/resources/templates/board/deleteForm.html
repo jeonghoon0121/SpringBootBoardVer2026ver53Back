@@ -1,0 +1,7 @@
+<h2>게시판 삭제</h2>
+<form th:action="@{/board/delete}" method="post">
+    <label>삭제할 게시판 번호 입력:
+        <input type="number" name="boardId" required />
+    </label>
+    <button type="submit">삭제</button>
+</form>

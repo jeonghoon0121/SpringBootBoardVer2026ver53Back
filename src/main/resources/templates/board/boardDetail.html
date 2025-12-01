@@ -1,0 +1,21 @@
+<ul>
+    <li th:each="post : ${postlist}">
+        <p th:text="${post.postId}"></p>
+        <p th:text="${post.boardId}"></p>
+        <p th:text="${post.authorId}"></p>
+        <p th:text="${post.password}"></p>
+        <p th:text="${post.ipHash}"></p>
+        <p th:text="${post.attachmentUrl}"></p>
+        <p th:text="${post.attachmentUrls}"></p>
+        <p th:text="${post.title}"></p>
+        <p th:text="${post.content}"></p>
+        <p th:text="${post.thumbnailUrl}"></p>
+        <p th:text="${post.accessLevel}"></p>
+        <p th:text="${post.status}"></p>
+        <p th:text="${post.viewCount}"></p>
+        <p th:text="${post.createdAt}"></p>
+        <p th:text="${post.updatedAt}"></p>
+        <p th:text="${post.notice}"></p>
+        <p th:text="${post.secret}"></p>
+    </li>
+</ul>

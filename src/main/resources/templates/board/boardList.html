@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f9f9f9; }
+        main { width:80%; margin:40px auto; }
+        h1 { text-align:center; color:#333; }
+        table { width:100%; border-collapse:collapse; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+        th, td { padding:10px; border-bottom:1px solid #ddd; text-align:center; }
+        th { background:#4CAF50; color:white; }
+        tr:hover { background:#f1f1f1; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>게시판 목록</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>이름</th>
+            <th>설명</th>
+            <th>사용자 활성</th>
+            <th>관리자 활성</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${boardList}">
+            <td th:text="${board.boardId}"></td>
+            <td th:text="${board.name}"></td>
+            <td th:text="${board.description}"></td>
+            <td th:text="${board.userActive}"></td>
+            <td th:text="${board.adminActive}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

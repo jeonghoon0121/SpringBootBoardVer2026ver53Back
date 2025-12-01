@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 목록</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f9f9f9; }
+        main { width:90%; margin:40px auto; }
+        h1 { text-align:center; color:#333; }
+        table { width:100%; border-collapse:collapse; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+        th, td { padding:8px; border-bottom:1px solid #ddd; text-align:center; font-size:14px; }
+        th { background:#4CAF50; color:white; }
+        tr:hover { background:#f1f1f1; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>게시글 목록</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Board</th>
+            <th>작성자</th>
+            <th>Password</th>
+            <th>IP</th>
+            <th>첨부파일</th>
+            <th>첨부파일들</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>썸네일</th>
+            <th>권한</th>
+            <th>Status</th>
+            <th>조회수</th>
+            <th>작성일</th>
+            <th>수정일</th>
+            <th>공지</th>
+            <th>비밀글</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${postList}">
+            <td th:text="${post.postId}"></td>
+            <td th:text="${post.boardId}"></td>
+            <td th:text="${post.authorId}"></td>
+            <td th:text="${post.password}"></td>
+            <td th:text="${post.ipHash}"></td>
+            <td th:text="${post.attachmentUrl}"></td>
+            <td th:text="${post.attachmentUrls}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.content}"></td>
+            <td th:text="${post.thumbnailUrl}"></td>
+            <td th:text="${post.accessLevel}"></td>
+            <td th:text="${post.status}">

@@ -1,10 +1,10 @@
-package com.abc.boardver52;
+package com.abc.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Boardver52ApplicationTests {
+class BoardverApplicationTests {
 
     @Test
     void contextLoads() {

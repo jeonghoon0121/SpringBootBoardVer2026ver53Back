@@ -1,4 +1,4 @@
-package com.abc.boardver52.model.dto;
+package com.abc.board.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

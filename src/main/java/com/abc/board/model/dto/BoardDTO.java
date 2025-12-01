@@ -1,4 +1,4 @@
-package com.abc.boardver52.model.dto;
+package com.abc.board.model.dto;
 
 public class BoardDTO {
     private Integer boardId;
@@ -7,7 +7,6 @@ public class BoardDTO {
     private Boolean isUserActive;
     private Boolean isAdminActive;
     public BoardDTO(){}
-
     public BoardDTO(Integer boardId, String name, String description, Boolean isUserActive, Boolean isAdminActive) {
         this.boardId = boardId;
         this.name = name;
@@ -54,16 +53,5 @@ public class BoardDTO {
 
     public void setAdminActive(Boolean adminActive) {
         isAdminActive = adminActive;
-    }
-
-    @Override
-    public String toString() {
-        return "BV5DTOBoard{" +
-                "boardId=" + boardId +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", isUserActive=" + isUserActive +
-                ", isAdminActive=" + isAdminActive +
-                '}';
     }
 }
