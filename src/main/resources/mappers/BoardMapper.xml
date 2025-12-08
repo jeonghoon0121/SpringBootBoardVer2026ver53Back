@@ -27,8 +27,8 @@
         <result property="thumbnailUrl" column="thumbnail_url"/>
         <result property="accessLevel" column="access_level"/>
         <result property="status" column="status"/>
-        <result property="isNotice" column="is_notice"/>
-        <result property="isSecret" column="is_secret"/>
+        <result property="notice" column="is_notice"/>
+        <result property="secret" column="is_secret"/>
     </resultMap>
 
     <resultMap id="commentResultMap" type="com.abc.board.model.dto.CommentDTO">
@@ -43,41 +43,95 @@
     </resultMap>
 
     <select id="findAllBoards" resultMap="boardResultMap">
-        SELECT board_id, name, description
+        SELECT
+        board_id,
+        name,
+        description,
+        user_active,
+        admin_active
         FROM board
         ORDER BY board_id
     </select>
 
     <select id="findAllPosts" resultMap="postResultMap">
-        SELECT post_id, board_id, author_id, password, title, content,
-        view_count, ip_hash, created_at, updated_at
+        SELECT
+        post_id,
+        board_id,
+        author_id,
+        password,
+        title,
+        content,
+        view_count,
+        ip_hash,
+        created_at,
+        updated_at,
+        attachment_url,
+        thumbnail_url,
+        access_level,
+        status,
+        is_notice,
+        is_secret
         FROM post
-        ORDER BY post_id
+        ORDER BY post_id;
     </select>
 
     <select id="findAllComments" resultMap="commentResultMap">
-        SELECT comment_id, post_id, author_id, password, content,
-        ip_hash, created_at, updated_at
+        SELECT
+        comment_id,
+        post_id,
+        author_id,
+        password,
+        content,
+        ip_hash,
+        created_at,
+        updated_at
         FROM comment
-        ORDER BY comment_id
+        ORDER BY comment_id;
     </select>
 
     <select id="findOneBoard" resultMap="boardResultMap">
-        SELECT board_id, name, description
+        SELECT
+        board_id,
+        name,
+        description,
+        user_active,
+        admin_active
         FROM board
         WHERE board_id = #{boardId}
     </select>
 
     <select id="findOnePost" resultMap="postResultMap">
-        SELECT post_id, board_id, author_id, password, title, content,
-        view_count, ip_hash, created_at, updated_at
+        SELECT
+        post_id,
+        board_id,
+        author_id,
+        password,
+        title,
+        content,
+        view_count,
+        ip_hash,
+        created_at,
+        updated_at,
+        attachment_url,
+        thumbnail_url,
+        access_level,
+        status,
+        is_notice,
+        is_secret
         FROM post
         WHERE post_id = #{postId}
     </select>
 
     <select id="findOneComment" resultMap="commentResultMap">
-        SELECT comment_id, post_id, author_id, password, content,
-        ip_hash, created_at, updated_at
+        SELECT
+        comment_id,
+        post_id,
+        author_id,
+        password,
+        content,
+        ip_hash,
+        created_at,
+        updated_at
         FROM comment
         WHERE comment_id = #{commentId}
     </select>
@@ -87,7 +141,6 @@
         VALUES (#{name}, #{description}, #{userActive}, #{adminActive})
     </insert>
 
-    <!-- 수정 -->
     <update id="updateBoard" parameterType="com.abc.board.model.dto.BoardDTO">
         UPDATE board
         SET name = #{name},
@@ -97,59 +150,99 @@
         WHERE board_id = #{boardId}
     </update>
 
-    <!-- 삭제 -->
     <delete id="deleteBoard" parameterType="int">
         DELETE FROM board WHERE board_id = #{boardId}
     </delete>
-    <!-- 수정된 parameterType 경로 -->
-    <insert id="addNewPost" parameterType="com.abc.board.model.dto.PostDTO">
+
+    <insert id="addPost" parameterType="com.abc.board.model.dto.PostDTO">
         INSERT INTO post (
-        board_id, author_id, password, title, content,
-        view_count, ip_hash, created_at, updated_at
-        ) VALUES (
-        #{boardId}, #{authorId}, #{password}, #{title}, #{content},
-        #{viewCount}, #{ipHash}, #{createdAt}, #{updatedAt}
+        board_id,
+        author_id,
+        password,
+        ip_hash,
+        attachment_url,
+        title,
+        content,
+        thumbnail_url,
+        status,
+        is_notice,
+        is_secret
+        )
+        VALUES (
+        #{boardId},
+        #{authorId},
+        #{password},
+        #{ipHash},
+        #{attachmentUrl},
+        #{title},
+        #{content},
+        #{thumbnailUrl},
+        #{status},
+        #{notice},
+        #{secret}
         )
     </insert>
 
+
     <update id="updatePost" parameterType="com.abc.board.model.dto.PostDTO">
         UPDATE post
-        SET title = #{title}, content = #{content}, updated_at = #{updatedAt}
+        SET
+        board_id = #{boardId},
+        author_id = #{authorId},
+        password = #{password},
+        ip_hash = #{ipHash},
+        attachment_url = #{attachmentUrl},
+        title = #{title},
+        content = #{content},
+        thumbnail_url = #{thumbnailUrl},
+        access_level = #{accessLevel},
+        status = #{status},
+        view_count = #{viewCount},
+        created_at = #{createdAt},
+        updated_at = #{updatedAt},
+        is_notice = #{notice},
+        is_secret = #{secret}
         WHERE post_id = #{postId}
-        AND author_id = #{authorId}
-        AND password = #{password}
     </update>
 
     <delete id="deletePost" parameterType="com.abc.board.model.dto.PostDTO">
         DELETE FROM post
         WHERE post_id = #{postId}
-        AND author_id = #{authorId}
-        AND password = #{password}
     </delete>
 
     <insert id="addComment" parameterType="com.abc.board.model.dto.CommentDTO">
         INSERT INTO comment (
-        post_id, author_id, password, content,
-        ip_hash, created_at, updated_at
-        ) VALUES (
-        #{postId}, #{authorId}, #{password}, #{content},
-        #{ipHash}, #{createdAt}, #{updatedAt}
+        post_id,
+        author_id,
+        password,
+        content,
+        ip_hash
+        )
+        VALUES (
+        #{postId},
+        #{authorId},
+        #{password},
+        #{content},
+        #{ipHash}
         )
     </insert>
 
+
     <update id="updateComment" parameterType="com.abc.board.model.dto.CommentDTO">
         UPDATE comment
-        SET content = #{content}, ip_hash = #{ipHash}, updated_at = #{updatedAt}
+        SET
+        post_id=#{postId},
+        author_id = #{authorId},
+        password = #{password},
+        content = #{content},
+        ip_hash = #{ipHash}
         WHERE comment_id = #{commentId}
-        AND author_id = #{authorId}
-        AND password = #{password}
     </update>
+
 
     <delete id="deleteComment" parameterType="com.abc.board.model.dto.CommentDTO">
         DELETE FROM comment
         WHERE comment_id = #{commentId}
-        AND author_id = #{authorId}
-        AND password = #{password}
     </delete>
 
 </mapper>

@@ -10,7 +10,6 @@ public class PostDTO {
     private String password;
     private String ipHash;
     private String attachmentUrl;
-    private List<String> attachmentUrls;
     private String title;
     private String content;
     private String thumbnailUrl;
@@ -19,20 +18,19 @@ public class PostDTO {
     private Integer viewCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Boolean isNotice;
-    private Boolean isSecret;
+    private Boolean notice;
+    private Boolean secret;
 
 
     public PostDTO(){}
 
-    public PostDTO(Integer postId, Integer boardId, String authorId, String password, String ipHash, String attachmentUrl, List<String> attachmentUrls, String title, String content, String thumbnailUrl, String accessLevel, String status, Integer viewCount, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean isNotice, Boolean isSecret) {
+    public PostDTO(Integer postId, Integer boardId, String authorId, String password, String ipHash, String attachmentUrl, String title, String content, String thumbnailUrl, String accessLevel, String status, Integer viewCount, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean notice, Boolean secret) {
         this.postId = postId;
         this.boardId = boardId;
         this.authorId = authorId;
         this.password = password;
         this.ipHash = ipHash;
         this.attachmentUrl = attachmentUrl;
-        this.attachmentUrls = attachmentUrls;
         this.title = title;
         this.content = content;
         this.thumbnailUrl = thumbnailUrl;
@@ -41,8 +39,8 @@ public class PostDTO {
         this.viewCount = viewCount;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.isNotice = isNotice;
-        this.isSecret = isSecret;
+        this.notice = notice;
+        this.secret = secret;
     }
 
     public Integer getPostId() {
@@ -91,14 +89,6 @@ public class PostDTO {
 
     public void setAttachmentUrl(String attachmentUrl) {
         this.attachmentUrl = attachmentUrl;
-    }
-
-    public List<String> getAttachmentUrls() {
-        return attachmentUrls;
-    }
-
-    public void setAttachmentUrls(List<String> attachmentUrls) {
-        this.attachmentUrls = attachmentUrls;
     }
 
     public String getTitle() {
@@ -166,41 +156,18 @@ public class PostDTO {
     }
 
     public Boolean getNotice() {
-        return isNotice;
+        return notice;
     }
 
     public void setNotice(Boolean notice) {
-        isNotice = notice;
+        this.notice = notice;
     }
 
     public Boolean getSecret() {
-        return isSecret;
+        return secret;
     }
 
     public void setSecret(Boolean secret) {
-        isSecret = secret;
-    }
-
-    @Override
-    public String toString() {
-        return "BV5DTOPost{" +
-                "postId=" + postId +
-                ", boardId=" + boardId +
-                ", authorId='" + authorId + '\'' +
-                ", password='" + password + '\'' +
-                ", ipHash='" + ipHash + '\'' +
-                ", attachmentUrl='" + attachmentUrl + '\'' +
-                ", attachmentUrls=" + attachmentUrls +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
-                ", accessLevel='" + accessLevel + '\'' +
-                ", status='" + status + '\'' +
-                ", viewCount=" + viewCount +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", isNotice=" + isNotice +
-                ", isSecret=" + isSecret +
-                '}';
+        this.secret = secret;
     }
 }

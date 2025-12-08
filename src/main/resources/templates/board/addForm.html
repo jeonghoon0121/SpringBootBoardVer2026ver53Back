@@ -1,10 +1,20 @@
-<h2>게시판 등록</h2>
+<h2>게시판등록</h2>
 <form th:action="@{/board/add}" th:object="${board}" method="post">
     <label>게시판 이름:
         <input type="text" th:field="*{name}" />
     </label><br>
+
     <label>게시판 설명:
         <input type="text" th:field="*{description}" />
     </label><br>
+
+    <label>사용자 활성:
+        <input type="checkbox" th:field="*{userActive}" />
+    </label><br>
+
+    <label>관리자 활성:
+        <input type="checkbox" th:field="*{adminActive}" />
+    </label><br>
+
     <button type="submit">등록</button>
 </form>

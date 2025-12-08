@@ -4,15 +4,16 @@ public class BoardDTO {
     private Integer boardId;
     private String name;
     private String description;
-    private Boolean isUserActive;
-    private Boolean isAdminActive;
+    private Boolean UserActive;
+    private Boolean AdminActive;
     public BoardDTO(){}
-    public BoardDTO(Integer boardId, String name, String description, Boolean isUserActive, Boolean isAdminActive) {
+
+    public BoardDTO(Integer boardId, String name, String description, Boolean userActive, Boolean adminActive) {
         this.boardId = boardId;
         this.name = name;
         this.description = description;
-        this.isUserActive = isUserActive;
-        this.isAdminActive = isAdminActive;
+        UserActive = userActive;
+        AdminActive = adminActive;
     }
 
     public Integer getBoardId() {
@@ -40,18 +41,18 @@ public class BoardDTO {
     }
 
     public Boolean getUserActive() {
-        return isUserActive;
+        return UserActive;
     }
 
     public void setUserActive(Boolean userActive) {
-        isUserActive = userActive;
+        UserActive = userActive;
     }
 
     public Boolean getAdminActive() {
-        return isAdminActive;
+        return AdminActive;
     }
 
     public void setAdminActive(Boolean adminActive) {
-        isAdminActive = adminActive;
+        AdminActive = adminActive;
     }
 }

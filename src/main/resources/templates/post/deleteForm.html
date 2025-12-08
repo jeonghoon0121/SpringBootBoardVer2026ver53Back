@@ -1,0 +1,7 @@
+<h2>게시글삭제</h2>
+<form th:action="@{/post/delete}" method="post">
+    <label>삭제할 게시글 번호 입력:
+        <input type="number" name="postId" required />
+    </label>
+    <button type="submit">삭제</button>
+</form>

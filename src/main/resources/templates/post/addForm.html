@@ -1,0 +1,52 @@
+<h2>게시글 작성</h2>
+<form th:action="@{/post/add}" th:object="${post}" method="post">
+    <label>게시판 번호:
+        <input type="number" th:field="*{boardId}" />
+    </label><br>
+
+    <label>작성자 ID:
+        <input type="text" th:field="*{authorId}" />
+    </label><br>
+
+    <label>비밀번호:
+        <input type="password" th:field="*{password}" />
+    </label><br>
+
+    <label>IP Hash:
+        <input type="text" th:field="*{ipHash}" />
+    </label><br>
+
+    <label>첨부파일 URL:
+        <input type="text" th:field="*{attachmentUrl}" />
+    </label><br>
+
+    <label>제목:
+        <input type="text" th:field="*{title}" />
+    </label><br>
+
+    <label>내용:
+        <textarea th:field="*{content}"></textarea>
+    </label><br>
+
+    <label>썸네일 URL:
+        <input type="text" th:field="*{thumbnailUrl}" />
+    </label><br>
+
+    <label>상태:
+        <select th:field="*{status}">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="deleted">Deleted</option>
+        </select>
+    </label><br>
+
+    <label>공지 여부:
+        <input type="checkbox" th:field="*{notice}" />
+    </label><br>
+
+    <label>비밀글 여부:
+        <input type="checkbox" th:field="*{secret}" />
+    </label><br>
+
+    <button type="submit">등록</button>
+</form>

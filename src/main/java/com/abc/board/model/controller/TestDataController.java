@@ -22,13 +22,13 @@ public class TestDataController {
     @GetMapping // /test
     public String getTest(Model model) {
         List<BoardDTO> boardDTOS = boardService.findAllBoards();
-        model.addAttribute("boardlist", boardDTOS);
+        model.addAttribute("boardList", boardDTOS);
 
         List<PostDTO> postDTOS = boardService.findAllPosts();
-        model.addAttribute("postlist", postDTOS);
+        model.addAttribute("postList", postDTOS);
 
         List<CommentDTO> commentDTOS = boardService.findAllComments();
-        model.addAttribute("commentlist", commentDTOS);
+        model.addAttribute("commentList", commentDTOS);
 
         return "testData/test";
     }

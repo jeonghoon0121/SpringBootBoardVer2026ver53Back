@@ -15,7 +15,7 @@
 </head>
 <body>
 <main>
-    <h1>게시글 목록</h1>
+    <h1>게시글목록</h1>
     <table>
         <thead>
         <tr>
@@ -25,7 +25,6 @@
             <th>Password</th>
             <th>IP</th>
             <th>첨부파일</th>
-            <th>첨부파일들</th>
             <th>제목</th>
             <th>내용</th>
             <th>썸네일</th>
@@ -45,10 +44,25 @@
             <td th:text="${post.authorId}"></td>
             <td th:text="${post.password}"></td>
             <td th:text="${post.ipHash}"></td>
-            <td th:text="${post.attachmentUrl}"></td>
-            <td th:text="${post.attachmentUrls}"></td>
+            <td>
+                <a th:href="${post.attachmentUrl}" th:text="${post.attachmentUrl}"></a>
+            </td>
             <td th:text="${post.title}"></td>
             <td th:text="${post.content}"></td>
-            <td th:text="${post.thumbnailUrl}"></td>
+            <td>
+                <img th:src="${post.thumbnailUrl}" alt="썸네일" style="max-width:80px;"/>
+            </td>
             <td th:text="${post.accessLevel}"></td>
-            <td th:text="${post.status}">
+            <td th:text="${post.status}"></td>
+            <td th:text="${post.viewCount}"></td>
+            <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${post.notice}"></td>
+            <td th:text="${post.secret}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+</body>
+</html>

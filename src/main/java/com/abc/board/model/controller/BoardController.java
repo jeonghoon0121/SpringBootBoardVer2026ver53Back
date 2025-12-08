@@ -24,44 +24,43 @@ public class BoardController {
         model.addAttribute("boardList", boardDTOS);
         return "board/boardList";
     }
-    @GetMapping("{boardId}")
+    @GetMapping("/{boardId}")
     public String getBoardDetail(@PathVariable int boardId, Model model) {
         BoardDTO board = boardService.findOneBoard(boardId);
         List<PostDTO> posts = boardService.findPostsByBoardId(boardId);
 
         model.addAttribute("board", board);
-        model.addAttribute("postlist", posts);
+        model.addAttribute("postList", posts);
         return "board/boardDetail";
     }
     @GetMapping("/add")
     public String showAddBoardForm(Model model) {
         model.addAttribute("board", new BoardDTO());
-        return "board/addForm"; // createForm.html로 이동
+        return "board/addForm";
     }
     @PostMapping("/add")
     public String createBoard(@ModelAttribute BoardDTO board) {
-        boardService.addBoard(board); // 서비스에서 DB 저장
-        return "redirect:/board"; // 등록 후 목록으로 리다이렉트
+        boardService.addBoard(board);
+        return "redirect:/board";
     }
-    @GetMapping("/update/{boardId}")
-    public String showUpdateBoardForm(@PathVariable int boardId, Model model) {
-        BoardDTO board = boardService.findOneBoard(boardId);
-        model.addAttribute("board", board);
+    @GetMapping("/update")
+    public String showUpdateBoardForm(Model model) {
+        model.addAttribute("board", new BoardDTO());
         return "board/updateForm";
     }
-    @PostMapping("/update/{boardId}")
-    public String updateBoard(@PathVariable int boardId, @ModelAttribute BoardDTO board) {
-        board.setBoardId(boardId); // PathVariable로 받은 ID를 DTO에 세팅
+    @PostMapping("/update")
+    public String updateBoard(@ModelAttribute BoardDTO board) {
         boardService.updateBoard(board);
-        return "redirect:/board/" + boardId; // 수정 후 상세 페이지로 이동
+        return "redirect:/board/";
     }
     @GetMapping("/delete")
-    public String showDeleteForm() {
-        return "deleteForm";
+    public String showDeleteForm(Model model) {
+        model.addAttribute("board", new BoardDTO());
+        return "board/deleteForm";
     }
     @PostMapping("/delete")
-    public String deleteBoardByBoardId(@RequestParam int boardId) {
-        boardService.deleteBoard(boardId);
-        return "redirect:/board"; // 삭제 후 목록으로 이동
+    public String deleteBoardByBoardId(@ModelAttribute BoardDTO board) {
+        boardService.deleteBoard(board.getBoardId());
+        return "redirect:/board";
     }
 }

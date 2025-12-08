@@ -1,8 +1,19 @@
-<h2>게시판 수정</h2>
-<form th:action="@{'/board/update/' + ${board.boardId}}" th:object="${board}" method="post">
-    <label>이름: <input type="text" th:field="*{name}" /></label><br>
-    <label>설명: <input type="text" th:field="*{description}" /></label><br>
-    <label>사용자 활성화: <input type="checkbox" th:field="*{userActive}" /></label><br>
-    <label>관리자 활성화: <input type="checkbox" th:field="*{adminActive}" /></label><br>
-    <button type="submit">수정</button>
+<h2>게시판수정</h2>
+<form th:action="@{/board/update}" th:object="${board}" method="post">
+    <label>게시판 번호:
+        <input type="number" th:field="*{boardId}" />
+    </label><br>
+    <label>게시판 이름:
+        <input type="text" th:field="*{name}" />
+    </label><br>
+    <label>게시판 설명:
+        <input type="text" th:field="*{description}" />
+    </label><br>
+    <label>사용자 활성:
+        <input type="checkbox" th:field="*{userActive}" />
+    </label><br>
+    <label>관리자 활성:
+        <input type="checkbox" th:field="*{adminActive}" />
+    </label><br>
+    <button type="submit">등록</button>
 </form>

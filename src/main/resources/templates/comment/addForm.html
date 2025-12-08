@@ -1,0 +1,24 @@
+<h2>댓글 등록</h2>
+<form th:action="@{/comment/add}" th:object="${comment}" method="post">
+    <label>게시글 번호:
+        <input type="number" th:field="*{postId}" />
+    </label>
+    <br>
+    <label>작성자 ID:
+        <input type="text" th:field="*{authorId}" />
+    </label><br>
+
+    <label>비밀번호:
+        <input type="password" th:field="*{password}" />
+    </label><br>
+
+    <label>내용:
+        <textarea th:field="*{content}"></textarea>
+    </label><br>
+
+    <label>IP Hash:
+        <input type="text" th:field="*{ipHash}" />
+    </label><br>
+
+    <button type="submit">등록</button>
+</form>

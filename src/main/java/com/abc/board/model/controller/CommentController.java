@@ -1,6 +1,5 @@
 package com.abc.board.model.controller;
 
-import com.abc.board.model.dto.BoardDTO;
 import com.abc.board.model.dto.CommentDTO;
 import com.abc.board.service.BoardService;
 import org.springframework.stereotype.Controller;
@@ -18,40 +17,49 @@ public class CommentController {
         this.boardService = boardService;
     }
 
-    /* comment 추가 */
-    @GetMapping("/add/{postId}")
-    public String showCommentAddForm(@PathVariable int postId, Model model) {
-        List<BoardDTO> boardDTOS = boardService.findAllBoards();
-        model.addAttribute("boardlist", boardDTOS);
-        model.addAttribute("postId", postId);
-        return "commentAdd";
+    @GetMapping
+    public String getCommentList(Model model) {
+        List<CommentDTO> commentDTOS = boardService.findAllComments();
+        model.addAttribute("commentList", commentDTOS);
+        return "comment/commentList";
     }
+    @GetMapping("/{commentId}")
+    public String getCommentDetail(@PathVariable int commentId, Model model) {
+        CommentDTO comments = boardService.findOneComment(commentId);
 
-    @PostMapping("/add/{postId}")
-    public String handleCommentAdd(@PathVariable int postId,
-                                   @ModelAttribute CommentDTO commentDTO) {
-        commentDTO.setPostId(postId);
-        boardService.addNewComment(commentDTO);
-        return "redirect:/post/" + postId;
+        model.addAttribute("comment", comments);
+        return "comment/commentDetail";
     }
-
-    /* comment 수정 */
-    @PostMapping("/update/{commentId}")
-    public String handleCommentUpdate(@PathVariable int commentId,
-                                      @ModelAttribute CommentDTO commentDTO) {
-        commentDTO.setCommentId(commentId);
-        int postId = boardService.findOneComment(commentId).getPostId(); // 수정된 부분
+    @GetMapping("/add")
+    public String showAddCommentForm(Model model) {
+        model.addAttribute("comment", new CommentDTO());
+        return "comment/addForm";
+    }
+    @PostMapping("/add")
+    public String createComment(@ModelAttribute CommentDTO commentDTO) {
+        boardService.addComment(commentDTO);
+        return "redirect:/comment";
+    }
+    @GetMapping("/update")
+    public String showUpdateCommentForm(Model model) {
+        model.addAttribute("comment", new CommentDTO());
+        return "comment/updateForm";
+    }
+    @PostMapping("/update")
+    public String updateComment(@ModelAttribute CommentDTO commentDTO) {
         boardService.updateComment(commentDTO);
-        return "redirect:/post/" + postId;
+        return "redirect:/comment";
+    }
+    @GetMapping("/delete")
+    public String showDeleteForm(Model model) {
+        model.addAttribute("comment", new CommentDTO());
+        return "comment/deleteForm";
+    }
+    @PostMapping("/delete")
+    public String deleteComment(@ModelAttribute CommentDTO commentDTO) {
+        boardService.deleteComment(commentDTO);
+        return "redirect:/comment";
     }
 
-    /* comment 삭제 */
-    @PostMapping("/delete/{commentId}")
-    public String handleCommentDelete(@PathVariable int commentId,
-                                      @ModelAttribute CommentDTO commentDTO) {
-        commentDTO.setCommentId(commentId);
-        int postId = boardService.findOneComment(commentId).getPostId(); // 수정된 부분
-        boardService.deleteComment(commentDTO);
-        return "redirect:/post/" + postId;
-    }
+
 }

@@ -1,0 +1,7 @@
+<h2>댓글삭제</h2>
+<form th:action="@{/comment/delete}" method="post">
+    <label>삭제할 댓글 번호 입력:
+        <input type="number" name="commentId" required />
+    </label>
+    <button type="submit">삭제</button>
+</form>

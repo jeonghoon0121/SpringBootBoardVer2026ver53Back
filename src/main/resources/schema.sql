@@ -1,6 +1,4 @@
--- 계정 생성 후 데이터베이스 활용
 
--- 1) 새로운 계정 만들기
 CREATE USER 'ohgiraffers'@'%' IDENTIFIED BY 'ohgiraffers';
 
 -- 현재 존재하는 데이터베이스 확인
@@ -10,9 +8,7 @@ SHOW databases;
 USE mysql;
 
 SELECT * FROM USER;
-
--- 2) 데이터베이스 생성 후 계정에 권한 부여
--- 데이터베이스(스키마)생성
+DROP DATABASE projectdb;
 CREATE DATABASE projectdb;
 
 GRANT ALL PRIVILEGES ON projectdb.* TO 'ohgiraffers'@'%';
@@ -54,6 +50,7 @@ CREATE TABLE post (
                       is_secret BOOLEAN DEFAULT FALSE,
                       FOREIGN KEY (board_id) REFERENCES board(board_id)
 );
+select * from post;
 CREATE TABLE comment (
                          comment_id INT PRIMARY KEY AUTO_INCREMENT,
                          post_id INT NOT NULL,
@@ -65,3 +62,4 @@ CREATE TABLE comment (
                          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                          FOREIGN KEY (post_id) REFERENCES post(post_id)
 );
+select * from comment;

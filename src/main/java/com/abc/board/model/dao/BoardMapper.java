@@ -4,10 +4,11 @@ package com.abc.board.model.dao;
 import com.abc.board.model.dto.BoardDTO;
 import com.abc.board.model.dto.CommentDTO;
 import com.abc.board.model.dto.PostDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@org.apache.ibatis.annotations.Mapper
+@Mapper
 public interface BoardMapper {
     // ===== Board =====
     List<BoardDTO> findAllBoards();
@@ -21,7 +22,7 @@ public interface BoardMapper {
     List<PostDTO> findAllPosts();
     PostDTO findOnePost(int postId);
 
-    void addNewPost(PostDTO postDTO);
+    void addPost(PostDTO postDTO);
     void updatePost(PostDTO postDTO);
     void deletePost(PostDTO postDTO);
 

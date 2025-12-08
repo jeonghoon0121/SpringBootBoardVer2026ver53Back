@@ -1,5 +1,5 @@
 <ul>
-    <li th:each="board : ${boardlist}">
+    <li th:each="board : ${boardList}">
         <p th:text="${board.boardId}"></p>
         <p th:text="${board.name}"></p>
         <p th:text="${board.description}"></p>
@@ -15,7 +15,6 @@
         <p th:text="${post.password}"></p>
         <p th:text="${post.ipHash}"></p>
         <p th:text="${post.attachmentUrl}"></p>
-        <p th:text="${post.attachmentUrls}"></p>
         <p th:text="${post.title}"></p>
         <p th:text="${post.content}"></p>
         <p th:text="${post.thumbnailUrl}"></p>
