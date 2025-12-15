@@ -38,8 +38,8 @@ public class BoardService {
     }
 
     @Transactional
-    public void deleteBoard(int boardId) {
-        mapper.deleteBoard(boardId);
+    public void deleteBoard(BoardDTO boardDTO) {
+        mapper.deleteBoard(boardDTO);
     }
 
     // ===== Post =====

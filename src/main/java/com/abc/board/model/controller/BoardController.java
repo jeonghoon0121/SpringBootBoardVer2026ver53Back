@@ -60,7 +60,7 @@ public class BoardController {
     }
     @PostMapping("/delete")
     public String deleteBoardByBoardId(@ModelAttribute BoardDTO board) {
-        boardService.deleteBoard(board.getBoardId());
+        boardService.deleteBoard(board);
         return "redirect:/board";
     }
 }

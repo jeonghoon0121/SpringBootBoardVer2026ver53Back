@@ -150,7 +150,7 @@
         WHERE board_id = #{boardId}
     </update>
 
-    <delete id="deleteBoard" parameterType="int">
+    <delete id="deleteBoard" parameterType="com.abc.board.model.dto.BoardDTO">
         DELETE FROM board WHERE board_id = #{boardId}
     </delete>
 

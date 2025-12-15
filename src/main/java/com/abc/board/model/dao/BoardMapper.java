@@ -16,6 +16,7 @@ public interface BoardMapper {
 
     void addBoard(BoardDTO boardDTO);
     void updateBoard(BoardDTO boardDTO);
+    void deleteBoard(BoardDTO boardDTO);
     void deleteBoard(int boardId);
 
     // ===== Post =====
