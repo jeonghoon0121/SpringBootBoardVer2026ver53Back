@@ -1,6 +1,5 @@
-package com.abc.board.model.controller;
+package com.abc.board.model.restcontroller;
 
-import com.abc.board.model.dto.BoardDTO;
 import com.abc.board.model.dto.CommentDTO;
 import com.abc.board.model.dto.PostDTO;
 import com.abc.board.service.BoardService;
